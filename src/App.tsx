@@ -6,12 +6,18 @@ import { Todo } from './todo.model';
 
 function App() {
 
+const url = 'https://todo-list-back-end.herokuapp.com';
+
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    fetch('https://goodnightbuddy.github.io/todo-list-front-end/todos', { method: 'GET' })
+    fetch(`${url}/todos`, { method: 'GET',
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
+  })
       .then(response => response.json())
       .then(data => setTodos(data.todos))
       .catch(error => console.log(error.message))
@@ -20,7 +26,7 @@ function App() {
 
   const todoAddHandler = (text: string) => {
     setLoading(true);
-    fetch('https://goodnightbuddy.github.io/todo-list-front-end/todos', {
+    fetch(`${url}/todos`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -43,7 +49,7 @@ function App() {
     setTodos(prevTodos => {
       return prevTodos.filter(todo => todo.id !== todoId)
     })
-    fetch(`https://goodnightbuddy.github.io/todo-list-front-end/todos/${todoId}`, { method: 'DELETE' })
+    fetch(`${url}/todos/${todoId}`, { method: 'DELETE' })
       .then(response => response.json())
       .then(data => {
         if (data.message === 'Todo deleted!') {
@@ -57,8 +63,8 @@ function App() {
       .finally(() => setLoading(false))
   };
 
-  const todoUpdateHandler = (id: number, text: string) => {
-    fetch(`https://goodnightbuddy.github.io/todo-list-front-end/todos/${id}`, {
+  const todoUpdateHandler = (todoId: number, text: string) => {
+    fetch(`${url}/todos/${todoId}`, {
       method: 'PATCH',
       headers: {
         "Content-Type": "application/json"

@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    fetch('/todos', { method: 'GET' })
+    fetch('https://goodnightbuddy.github.io/todo-list-front-end/todos', { method: 'GET' })
       .then(response => response.json())
       .then(data => setTodos(data.todos))
       .catch(error => console.log(error.message))
@@ -20,7 +20,7 @@ function App() {
 
   const todoAddHandler = (text: string) => {
     setLoading(true);
-    fetch('/todos', {
+    fetch('https://goodnightbuddy.github.io/todo-list-front-end/todos', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -43,7 +43,7 @@ function App() {
     setTodos(prevTodos => {
       return prevTodos.filter(todo => todo.id !== todoId)
     })
-    fetch(`/todos/${todoId}`, { method: 'DELETE' })
+    fetch(`https://goodnightbuddy.github.io/todo-list-front-end/todos/${todoId}`, { method: 'DELETE' })
       .then(response => response.json())
       .then(data => {
         if (data.message === 'Todo deleted!') {
@@ -58,7 +58,7 @@ function App() {
   };
 
   const todoUpdateHandler = (id: number, text: string) => {
-    fetch(`/todos/${id}`, {
+    fetch(`https://goodnightbuddy.github.io/todo-list-front-end/todos/${id}`, {
       method: 'PATCH',
       headers: {
         "Content-Type": "application/json"

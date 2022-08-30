@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react"
 
 type NewTodoProps = {
   onAddTodo: (text: string) => void;
+  loading: boolean;
 }
 
 
@@ -26,7 +27,7 @@ const NewTodo: React.FC<NewTodoProps> = props => {
         <label htmlFor="todo-text">Todo text</label>
         <input type="text" id="todo-text" ref={textInputRef}/>
       </div>
-      <button type="submit">ADD TODO</button>
+      <button type="submit" disabled={props.loading}>ADD TODO</button>
     </form>
   );
 }

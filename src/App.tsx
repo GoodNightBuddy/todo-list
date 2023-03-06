@@ -6,7 +6,7 @@ import { Todo } from './todo.model';
 
 function App() {
 
-const url = 'https://todo-list-back-end.herokuapp.com';
+const url = 'https://todo-list-back-end.onrender.com';
 
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState(false);
